@@ -1,1 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Final Question 💘</title>
 
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 420px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    .muted {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    input {
+      padding: 10px;
+      width: 80%;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin: 15px 10px;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background: #ddd;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .punch {
+      animation: punch 0.25s infinite;
+      background: #ff1e1e !important;
+    }
+
+    @keyframes punch {
+      0% { transform: translate(0,0); }
+      25% { transform: translate(15px,-15px); }
+      50% { transform: translate(-15px,15px); }
+      75% { transform: translate(15px,15px); }
+      100% { transform: translate(-15px,-15px); }
+    }
+
+    .big {
+      font-size: 32px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card" id="card">
+    <h2>Math Test 🧠</h2>
+    <p>Solve this (no calculator 😏)</p>
+
+    <p class="big" id="question"></p>
+    <input type="number" id="answer" placeholder="Your answer"/>
+    <br/>
+    <button class="yes" onclick="checkAnswer()">Submit</button>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "48 ÷ 6 + 5", a: 13 },
+      { q: "9² − 17", a: 64 },
+      { q: "(6 × 7) − 14", a: 28 }
+    ];
+
+    let current = 0;
+
+    const qEl = document.getElementById("question");
+    const aEl = document.getElementById("answer");
+    const card = document.getElementById("card");
+
+    qEl.innerText = questions[current].q;
+
+    function checkAnswer() {
+      if (Number(aEl.value) === questions[current].a) {
+        current++;
+        aEl.value = "";
+
+        if (current < questions.length) {
+          qEl.innerText = questions[current].q;
+        } else {
+          finalQuestion();
+        }
+      } else {
+        alert("Wrong 😏 Try again");
+      }
+    }
+
+    function finalQuestion() {
+      card.innerHTML = `
+        <p class="muted">You solved all the math…</p>
+        <p class="muted">But you forgot to ask me 😌</p>
+        <p><strong>So here I am hahaha 💕</strong></p>
+
+        <h2>Will you be my Valentine? 💘</h2>
+
+        <button class="yes" onclick="finalYes()">YES 💋</button>
+        <button class="no" onclick="finalNo()">NO 😒</button>
+      `;
+    }
+
+    function finalYes() {
+      card.innerHTML = `
+        <h1>💋</h1>
+        <h2>YAYYY BUBS</h2>
+        <p>Good boy 😌❤️</p>
+      `;
+    }
+
+    function finalNo() {
+      document.body.classList.add("punch");
+      card.innerHTML = `
+        <h1>💥</h1>
+        <h2>WRONG ANSWER</h2>
+      `;
+    }
+  </script>
+
+</body>
+</html>
